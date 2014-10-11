@@ -26,6 +26,8 @@
     <string name="addFriend">Add Friend</string>
     <string name="sendInvite">Send Invite</string>
     
+    <string name="location">Enter Event Address</string>
+    
     
 
 </resources>

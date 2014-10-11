@@ -44,9 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/sendInvite"
-        
- 		>
+        android:layout_below="@+id/sendInvite" >
 
     </ListView>
 
@@ -67,13 +65,27 @@
         android:id="@+id/friend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/location"
+        android:layout_alignLeft="@+id/location"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/location"
+        android:ems="10"
+        android:hint="@string/friend"
+        android:inputType="text"
+        android:textSize="14sp" />
+    
+	<EditText
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/date"
         android:layout_alignLeft="@+id/date"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/date"
         android:ems="10"
-        android:hint="@string/friend"
+        android:hint="@string/location"
         android:inputType="text"
         android:textSize="14sp" />
 
@@ -87,5 +99,6 @@
         android:ems="10"
         android:hint="@string/eventName"
         android:inputType="text" />
+
 
 </RelativeLayout>
