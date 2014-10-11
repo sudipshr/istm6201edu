@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -16,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -32,7 +36,7 @@ public class NotificationActivity extends FragmentActivity {
 	Button addFriendButton = null;
 	
 	EditText tv = null;
-	
+	AlertDialog.Builder alertBuilder;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,47 @@ public class NotificationActivity extends FragmentActivity {
 		tv.setTextColor(Color.BLACK);
 		adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, nList);
 		notificationList.setAdapter(adapter);
+		
+		alertBuilder = new AlertDialog.Builder(this);
+		
+		notificationList.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				final int index = position;
+				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch (which){
+				        case DialogInterface.BUTTON_POSITIVE:
+				        	nList.remove(index);
+				        	adapter.notifyDataSetChanged();
+				            break;
+
+				        case DialogInterface.BUTTON_NEGATIVE:
+				            //No button clicked
+				            break;
+				        }
+						
+					}
+					
+					
+				};
+				
+				
+				alertBuilder.setMessage("Remove from invite list?").setPositiveButton("Yes", dialogClickListener)
+				    .setNegativeButton("No", dialogClickListener).show();
+				
+				
+				return false;
+			}
+		
+
+		});
+		
 		addFriendButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -54,6 +99,7 @@ public class NotificationActivity extends FragmentActivity {
 				
 				nList.add(tv.getText().toString());
 				adapter.notifyDataSetChanged();
+				tv.getText().clear();
 				
 			}
 		});
@@ -87,6 +133,11 @@ public class NotificationActivity extends FragmentActivity {
 	public void showDatePicker(View v) {
 	    DialogFragment newFragment = new DatePickerFragment();
 	    newFragment.show(this.getFragmentManager(), "datePicker");
+	}
+	
+	public void listEditDialog(View view) {
+
+
 	}
 
 	public static class TimePickerFragment extends DialogFragment implements

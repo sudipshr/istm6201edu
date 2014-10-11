@@ -25,7 +25,9 @@
         <activity
             android:name=".NotificationActivity"
             android:label="@string/title_activity_notification"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
+             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.istmszone.andoird.MainActivity" />
